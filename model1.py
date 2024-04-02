@@ -63,8 +63,10 @@ class CNN(nn.Module):
        self.fc_layers = nn.Sequential(
            nn.Linear(16*16, 1024),  # Increased from 512 to 1024
            nn.ReLU(),
+           nn.Dropout(0.5),
            nn.Linear(1024, 512),  # Increased from 256 to 512
            nn.ReLU(),
+           nn.Dropout(0.5),
            nn.Linear(512, 10)
         )
 
