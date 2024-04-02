@@ -61,10 +61,13 @@ class CNN(nn.Module):
            nn.ReLU()
        )
        self.fc_layers = nn.Sequential(
-           nn.Linear(64 * 8 * 8, 128),
+           nn.Linear(16*16, 1024),  # Increased from 512 to 1024
            nn.ReLU(),
-           nn.Linear(128, 10)
-       )
+           nn.Linear(1024, 512),  # Increased from 256 to 512
+           nn.ReLU(),
+           nn.Linear(512, 10)
+        )
+
 
 
    def forward(self, x):
