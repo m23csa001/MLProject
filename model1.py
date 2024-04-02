@@ -54,17 +54,23 @@ class CNN(nn.Module):
    def __init__(self):
        super(CNN, self).__init__()
        self.conv_layers = nn.Sequential(
-           nn.Conv2d(1, 32, kernel_size=3, padding=1),
+           nn.Conv2d(1, 64, kernel_size=3, padding=1),  # Increased from 32 to 64
            nn.ReLU(),
            nn.MaxPool2d(2, 2),
-           nn.Conv2d(32, 64, kernel_size=3, padding=1),
+           nn.Conv2d(64, 128, kernel_size=3, padding=1),  # Increased from 64 to 128
            nn.ReLU()
-       )
+        )
+
        self.fc_layers = nn.Sequential(
-           nn.Linear(64 * 8 * 8, 128),
+           nn.Linear(16*16, 1024),  # Increased from 512 to 1024
            nn.ReLU(),
-           nn.Linear(128, 10)
-       )
+           nn.Dropout(0.5),
+           nn.Linear(1024, 512),  # Increased from 256 to 512
+           nn.ReLU(),
+           nn.Dropout(0.5),
+           nn.Linear(512, 10)
+        )
+
 
 
    def forward(self, x):
